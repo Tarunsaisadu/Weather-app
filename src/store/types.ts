@@ -1,86 +1,84 @@
-export const FETCH_WEATHER = "FETCH_WEATHER"
-export const FETCH_WEATHER_LOADING = "FETCH_WEATHER_LOADING"
-export const FETCH_WEATHER_ERROR = "FETCH_WEATHER_ERROR"
-export const FETCH_WEATHER_ALERT = "FETCH_WEATHER_ALERT"
+export const GET_WEATHER = 'GET_WEATHER';
+export const SET_LOADING = 'SET_LOADING';
+export const SET_ERROR = 'SET_ERROR';
+export const SET_ALERT = 'SET_ALERT';
 
 export interface Weather {
-    id : number
-    main: string
-    description : string
-    icon :string 
+  description: string;
+  icon: string;
+  id: number;
+  main: string;
 }
 
-export interface WeatherInfo {
-    base : string 
-    clouds: {
-        all: number 
-    };
-     cod : number ;
-     coord:{
-        lon : number ;
-        lat : number ;
-     };
-     dt: number ;
-     id: number;
-     main :{
-         feels_like: number;
-         humidity: number ;
-         pressure: number ;
-         temp :number ;
-         temp_min:number;
-         temp_max:number;
-
-     }
-     name :string 
-     sys:{
-        country: string;
-        id: number;
-        sunrise:number;
-        sunset:number ;
-        type: number ;
-     }
-
-     timezone :number;
-     visibility:number;
-     weather: Weather[];
-     wind : {
-         speed: number;
-         deg : number ;
-     }
-
+export interface WeatherData {
+  base: string;
+  clouds: {
+    all: number;
+  };
+  cod: number;
+  coord: {
+    lon: number;
+    lat: number;
+  };
+  dt: number;
+  id: number;
+  main: {
+    feels_like: number;
+    humidity: number;
+    pressure: number;
+    temp: number;
+    temp_max: number;
+    temp_min: number;
+  };
+  name: string;
+  sys: {
+    country: string;
+    id: number;
+    sunrise: number;
+    sunset: number;
+    type: number;
+  };
+  timezone: number;
+  visibility: number;
+  weather: Weather[];
+  wind: {
+    speed: number;
+    deg: number;
+  };
 }
 
- export interface WeatherError {
-     cod: string 
-     message: string 
- }
- export interface WeatherState{
-     data : WeatherInfo| null;
-     loading : boolean;
-     error : string;
+export interface WeatherError {
+  cod: string;
+  message: string;
+}
 
- }
+export interface WeatherState {
+  data: WeatherData | null;
+  loading: boolean;
+  error: string;
+}
 
- interface FetchWeatherAction {
-     type: typeof FETCH_WEATHER
-     payload: WeatherInfo
- }
- interface WeatherLoadingAction{
-        type : typeof FETCH_WEATHER_LOADING
-      
- }
- interface WeatherErrorAction {
-     type : typeof FETCH_WEATHER_ERROR
-     payload: string
- }
+interface GetWeatherAction {
+  type: typeof GET_WEATHER;
+  payload: WeatherData;
+}
 
- export type  WeatherAction = FetchWeatherAction | WeatherLoadingAction | WeatherErrorAction
+interface SetLoadingAction {
+  type: typeof SET_LOADING;
+}
 
- export interface WeatherAlertAction {
-     type : typeof FETCH_WEATHER_ALERT
-     payload: string
- }
+interface SetErrorAction {
+  type: typeof SET_ERROR;
+  payload: string;
+}
 
- export interface AlertState {
-     message : string; 
- }
+export type WeatherAction = GetWeatherAction | SetLoadingAction | SetErrorAction;
+
+export interface AlertAction {
+  type: typeof SET_ALERT;
+  payload: string;
+}
+
+export interface AlertState {
+  message: string;
+}

@@ -1,30 +1,59 @@
-import React , {FC} from 'react'
-import { WeatherInfo } from '../store/types'
+import React, { FC } from 'react';
+import { WeatherData } from '../store/types';
+
 
 interface WeatherProps {
-    data : WeatherInfo
+  data: WeatherData;
 }
-const  Weather : FC <WeatherProps> = ({data})=>{
-    return (
 
-        <div>
-            <h1>{data.name}-{data.sys.country}</h1>
-            <p>{data.weather[0].description}</p>
-            <p><img src={`http://openweather.org/img/wn/${data.weather[0].icon}` }alt="" /></p>
+const Weather: FC<WeatherProps> = ({ data }) => {
+  // const fahrenheit = (data.main.temp * 1.8 - 459.67).toFixed(2);
+  // const celsius = (data.main.temp - 273.15).toFixed(2);
+
+  return(
+  
+      <div>
+  
+        <h1 >{data.name} - {data.sys.country}</h1>
+        <div >
+          <div >
             <div>
-                <h4>temperature</h4>
-                <p>{data.main.temp}</p>
-                <p>{data.main.temp}</p>
-               
+              <p >{data.weather[0].description}</p>
+              <p ><img src={`http://openweathermap.org/img/wn/${data.weather[0].icon}.png`} alt=""/></p>
             </div>
+          </div>
+          <div >
             <div>
-                <h4> Humidity : {data.main.humidity}</h4>
-                <h4>pressure : {data.main.pressure}</h4>
-                <h4>windspeed : {data.wind.speed}</h4>
+              <p >temp</p>
+              <div >
+                <p >{data.main.temp}K</p>
+                {/* <p >{fahrenheit}<sup>&#8457;</sup></p>
+                <p>{celsius}<sup>&#8451;</sup></p> */}
+              </div>
             </div>
+          </div>
+          <div >
+            <div>
+              <p >humidity</p>
+              <p >{data.main.humidity}</p>
+            </div>
+          </div>
+          <div >
+            <div>
+              <p >pressure</p>
+              <p >{data.main.pressure}</p>
+            </div>
+          </div>
+          <div >
+            <div>
+              <p >wind</p>
+              <p >{data.wind.speed} m/s</p>
+            </div>
+          </div>
         </div>
-    )
-
-    
+      </div>
+  
+  );
 }
-export default Weather
+
+export default Weather;
